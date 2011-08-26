@@ -435,7 +435,7 @@ func (stmt *Statement) GetField(field_index int) (v interface{}, ftype int, flen
 	var fl C.SQLLEN = C.SQLLEN(field_len)
 	switch int(field_type) {
 	case C.SQL_BIT, C.SQL_INTEGER, C.SQL_SMALLINT, C.SQL_TINYINT:
-		var value C.HANDLE
+		var value C.int
 		ret = C.SQLGetData(C.SQLHSTMT(stmt.handle), C.SQLUSMALLINT(field_index+1), C.SQL_C_LONG, C.SQLPOINTER(unsafe.Pointer(&value)), 0, &fl)
 		if fl == -1 {
 			v = nil
